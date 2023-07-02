@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8xsie3eygt5v"]
+
+[ext_resource type="PackedScene" uid="uid://bpcsqpoh1xapp" path="res://Game/Character/Enemy/EnemyCharacter.tscn" id="1_luswp"]
+[ext_resource type="PackedScene" path="res://Game/Components/HQFinder.tscn" id="2_y0wt5"]
+[ext_resource type="Script" path="res://Game/Character/Enemy/Zombie.gd" id="2_y5wey"]
+[ext_resource type="Script" path="res://Game/Components/Controllers/EnemyController.gd" id="3_646ll"]
+[ext_resource type="PackedScene" uid="uid://1q2twk6ywl7d" path="res://Game/Components/HealthBar.tscn" id="5_x1foy"]
+
+[node name="Zombie" node_paths=PackedStringArray("healthBar") instance=ExtResource("1_luswp")]
+script = ExtResource("2_y5wey")
+healthBar = NodePath("HealthBar")
+ACCELERATION = 700.0
+MAX_SPEED = 75.0
+
+[node name="Shadow" parent="." index="0"]
+position = Vector2(0, -2.5)
+
+[node name="HQFinder" parent="." index="3" instance=ExtResource("2_y0wt5")]
+
+[node name="EnemyController" type="Node" parent="." index="4" node_paths=PackedStringArray("hqFinder")]
+script = ExtResource("3_646ll")
+hqFinder = NodePath("../HQFinder")
+
+[node name="HealthBar" parent="." index="6" instance=ExtResource("5_x1foy")]
+position = Vector2(-9.53674e-07, -6)
+scale = Vector2(0.1, 0.1)
+VISIBLE_WHEN_DAMAGED = true
+MAX_HEALTH = 10
+DAMAGE_COUNTER_SCALE = Vector2(0.5, 0.5)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://1q2twk6ywl7d"]
+
+[ext_resource type="Script" path="res://Game/Components/HealthBar.gd" id="1_x8j6o"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="2_12bqi"]
+[ext_resource type="PackedScene" uid="uid://cgy8a4jcdmos4" path="res://Game/Components/DamageCounter.tscn" id="3_y3tcq"]
+
+[node name="HealthBar" type="Node2D" node_paths=PackedStringArray("sceneSpawner", "progressBar")]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_x8j6o")
+sceneSpawner = NodePath("SceneSpawner")
+progressBar = NodePath("Control/ProgressBar")
+
+[node name="SceneSpawner" parent="." instance=ExtResource("2_12bqi")]
+scenePath = ExtResource("3_y3tcq")
+spawnCount = 1
+spawnRadius = 5.0
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(100, 20)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -55.0
+offset_right = 50.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+rounded = true
+show_percentage = false

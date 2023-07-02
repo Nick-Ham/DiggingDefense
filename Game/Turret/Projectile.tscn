@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://70q2uu4lryk1"]
+
+[ext_resource type="Script" path="res://Game/Turret/Projectile.gd" id="1_3nasg"]
+[ext_resource type="Texture2D" uid="uid://dkwkt5y8g6o3n" path="res://Assets/Turret/TurretFireball.png" id="1_uu3wa"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="3_2873y"]
+[ext_resource type="PackedScene" uid="uid://cdkpy77v72u7o" path="res://Game/Effects/OnFireEffect.tscn" id="4_d7qur"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghd6m"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gah4h"]
+size = Vector2(16, 32)
+
+[node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "effectSpawner")]
+collision_layer = 0
+script = ExtResource("1_3nasg")
+speed = 350
+sprite = NodePath("Sprite2D")
+effectSpawner = NodePath("SceneSpawner")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uu3wa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_ghd6m")
+
+[node name="CharacterHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHitBox"]
+shape = SubResource("RectangleShape2D_gah4h")
+
+[node name="SceneSpawner" parent="." instance=ExtResource("3_2873y")]
+scenePath = ExtResource("4_d7qur")
+spawnCount = 1
+
+[connection signal="body_entered" from="CharacterHitBox" to="." method="_on_character_hit_box_body_entered"]

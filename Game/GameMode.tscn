@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1q5heqe045ht"]
+
+[ext_resource type="Script" path="res://Game/GameMode.gd" id="1_3xyvf"]
+[ext_resource type="PackedScene" uid="uid://dwcw718g4fbcm" path="res://Levels/TestLevel.tscn" id="2_o04fd"]
+[ext_resource type="PackedScene" uid="uid://cnpd1vprqtkg0" path="res://Game/Debug.tscn" id="3_2atxu"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="4_turvy"]
+[ext_resource type="PackedScene" uid="uid://ckseh2ahneglg" path="res://UI/Reset.tscn" id="5_v3wlk"]
+[ext_resource type="PackedScene" uid="uid://b25iadheon2u4" path="res://UI/WaveStart.tscn" id="6_bicmm"]
+
+[node name="GameMode" type="Node" node_paths=PackedStringArray("level", "sceneSpawner", "resetUI", "waveStartUI")]
+script = ExtResource("1_3xyvf")
+level = NodePath("Level")
+sceneSpawner = NodePath("LevelSceneSpawner")
+resetUI = NodePath("Reset")
+waveStartUI = NodePath("WaveStart")
+
+[node name="Level" parent="." instance=ExtResource("2_o04fd")]
+
+[node name="DEBUG" parent="." instance=ExtResource("3_2atxu")]
+visible = false
+
+[node name="LevelSceneSpawner" parent="." instance=ExtResource("4_turvy")]
+scenePath = ExtResource("2_o04fd")
+spawnCount = 1
+
+[node name="WaveStart" parent="." instance=ExtResource("6_bicmm")]
+
+[node name="Reset" parent="." instance=ExtResource("5_v3wlk")]

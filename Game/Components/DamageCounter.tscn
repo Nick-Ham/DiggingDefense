@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgy8a4jcdmos4"]
+
+[ext_resource type="Script" path="res://Game/Components/DamageCounter.gd" id="1_k17di"]
+
+[node name="DamageCounter" type="Node2D" node_paths=PackedStringArray("counterTimer", "counterText")]
+y_sort_enabled = true
+position = Vector2(-9, -10)
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_k17di")
+counterTimer = NodePath("Timer")
+counterText = NodePath("RichTextLabel")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = -3.0
+offset_top = -5.0
+offset_right = 66.0
+offset_bottom = 49.0
+text = "1
+"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

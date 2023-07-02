@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://k47oliu0gove"]
+
+[ext_resource type="Texture2D" uid="uid://cynpuh1elfgdl" path="res://Assets/Character/Shadow.png" id="1_4f8wt"]
+[ext_resource type="Texture2D" uid="uid://cem6pkrqwb353" path="res://Assets/Structures/HQ.png" id="1_34l8s"]
+[ext_resource type="Script" path="res://Game/HQ.gd" id="1_ifadx"]
+[ext_resource type="PackedScene" uid="uid://bvlijjqv1mxbu" path="res://Game/Components/EnemyInformer.tscn" id="5_gs5tl"]
+[ext_resource type="PackedScene" uid="uid://1q2twk6ywl7d" path="res://Game/Components/HealthBar.tscn" id="5_lytth"]
+
+[sub_resource type="Animation" id="Animation_c5nnq"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HQSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(-2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -19), Vector2(0, -16), Vector2(0, -19)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hvoa"]
+_data = {
+"Idle": SubResource("Animation_c5nnq")
+}
+
+[node name="HQ" type="Node2D" node_paths=PackedStringArray("health", "sprite")]
+script = ExtResource("1_ifadx")
+health = NodePath("HealthBar")
+sprite = NodePath("HQSprite")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_4f8wt")
+
+[node name="HQSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -19)
+texture = ExtResource("1_34l8s")
+offset = Vector2(0, 5)
+
+[node name="EnemyInformer" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_gs5tl")]
+Target = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+libraries = {
+"": SubResource("AnimationLibrary_8hvoa")
+}
+
+[node name="HealthBar" parent="." instance=ExtResource("5_lytth")]
+position = Vector2(-5.68434e-14, -22)
+VISIBLE_WHEN_DAMAGED = true
+MAX_HEALTH = 25

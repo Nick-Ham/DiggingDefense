@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cya314nb48ygd"]
+
+[ext_resource type="Script" path="res://Game/Turret/Turret.gd" id="1_oaeqj"]
+[ext_resource type="Texture2D" uid="uid://6or8isj0wsgb" path="res://Assets/Turret/Turret.png" id="2_amfbe"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="3_amt8c"]
+[ext_resource type="PackedScene" uid="uid://70q2uu4lryk1" path="res://Game/Turret/Projectile.tscn" id="4_mcp6t"]
+
+[sub_resource type="Gradient" id="Gradient_4obin"]
+offsets = PackedFloat32Array(0, 0.6875, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ww7fk"]
+gradient = SubResource("Gradient_4obin")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yvncc"]
+emission_shape = 3
+emission_box_extents = Vector3(0.5, 2, 0.5)
+particle_flag_disable_z = true
+spread = 38.27
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(1, 0.854902, 0.760784, 1)
+color_ramp = SubResource("GradientTexture1D_ww7fk")
+
+[node name="Turret" type="Node2D" node_paths=PackedStringArray("sprite", "reloadTimer", "projectileSpawnPosition", "sceneSpawner")]
+script = ExtResource("1_oaeqj")
+reloadDuration = null
+facing = null
+sprite = NodePath("TurretSprite")
+reloadTimer = NodePath("ReloadTimer")
+projectileSpawnPosition = NodePath("TurretSprite/ProjectileSpawnPosition")
+sceneSpawner = NodePath("SceneSpawner")
+
+[node name="TurretSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_amfbe")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TurretSprite"]
+position = Vector2(15, 0)
+emitting = false
+amount = 15
+process_material = SubResource("ParticleProcessMaterial_yvncc")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.9
+
+[node name="ProjectileSpawnPosition" type="Node2D" parent="TurretSprite"]
+position = Vector2(24, 0)
+
+[node name="SceneSpawner" parent="." instance=ExtResource("3_amt8c")]
+scenePath = ExtResource("4_mcp6t")
+spawnCount = 1
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_reload_timer_timeout"]

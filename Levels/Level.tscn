@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwwibfq5coxla"]
+
+[ext_resource type="Script" path="res://Levels/Level.gd" id="1_q4uwr"]
+[ext_resource type="Texture2D" uid="uid://3wd34d2wkcl4" path="res://Assets/Env/Void.png" id="1_y14xo"]
+[ext_resource type="PackedScene" uid="uid://c82c5xs8ua74i" path="res://Levels/Map.tscn" id="2_6sf0y"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("map")]
+script = ExtResource("1_q4uwr")
+map = NodePath("Map")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -4096
+texture_repeat = 2
+texture = ExtResource("1_y14xo")
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 2048)
+
+[node name="Map" parent="." instance=ExtResource("2_6sf0y")]
+z_index = -4095

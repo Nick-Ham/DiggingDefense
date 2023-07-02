@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://eqcl66xmtmju"]
+
+[ext_resource type="Texture2D" uid="uid://bskgsxq1g7tih" path="res://Assets/Character/Drill.png" id="1_gt52j"]
+[ext_resource type="Script" path="res://Game/Character/Player/Drill.gd" id="1_lbeba"]
+
+[node name="Drill" type="Node2D" node_paths=PackedStringArray("drillSprite")]
+visible = false
+script = ExtResource("1_lbeba")
+drillSprite = NodePath("DrillSprite")
+
+[node name="DrillSprite" type="Sprite2D" parent="."]
+position = Vector2(11, 0)
+texture = ExtResource("1_gt52j")
+offset = Vector2(3, 0)

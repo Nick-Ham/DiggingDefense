@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgut0xcs54mxi"]
+
+[ext_resource type="PackedScene" uid="uid://y2js2cxripyg" path="res://Game/Character/Base/Character.tscn" id="1_pp186"]
+[ext_resource type="Script" path="res://Game/Character/Player/PlayerCharacter.gd" id="2_1j4en"]
+[ext_resource type="Script" path="res://Game/Components/Controllers/PlayerController.gd" id="3_c6jf8"]
+[ext_resource type="PackedScene" uid="uid://eqcl66xmtmju" path="res://Game/Character/Player/Drill.tscn" id="4_75ile"]
+
+[node name="PlayerCharacter" node_paths=PackedStringArray("drill") instance=ExtResource("1_pp186")]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("2_1j4en")
+drill = NodePath("Drill")
+
+[node name="Camera2D" type="Camera2D" parent="." index="3"]
+zoom = Vector2(2, 2)
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+
+[node name="PlayerController" type="Node" parent="." index="4"]
+script = ExtResource("3_c6jf8")
+
+[node name="Drill" parent="." index="5" instance=ExtResource("4_75ile")]
+position = Vector2(0, -4)
