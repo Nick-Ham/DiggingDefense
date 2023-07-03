@@ -16,7 +16,7 @@ func _ready():
 	updateSpriteDirection()
 	reloadTimer.wait_time = reloadDuration
 	reloadTimer.start()
-	
+
 
 func updateSpriteDirection():
 	match facing:

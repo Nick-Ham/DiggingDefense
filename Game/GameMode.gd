@@ -46,7 +46,7 @@ func _on_wave_manager_state_changed(waveManager : WaveManager, newWaveState : Wa
 	if !newWaveState == WaveManager.WAVE_STATE.AWAITING_START:
 		waveStartUI.deactivateWaveStartScreen()
 		return
-
+	
 	waveStartUI.activateWaveStartScreen()
 
 func _on_level_last_hq_destroyed():

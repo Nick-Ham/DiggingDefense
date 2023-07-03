@@ -5,7 +5,7 @@ class_name Spawner
 @export var sceneSpawner : SceneSpawner
 @export var detector : Area2D
 
-@export var spawnLimit : int = 10
+@export var spawnLimit : int = 20
 
 var targetHQ : HQ
 
@@ -15,13 +15,13 @@ func ready():
 func trySpawn(scene : PackedScene) -> bool:
 	sceneSpawner.scenePath = scene
 	# this is garbage and needs to be removed
-	
+
 	if detector.get_overlapping_bodies().size() > spawnLimit:
 		return false
-	
+
 	var newInstance = sceneSpawner.instanceScene(Game.getGameMode().getLevel(), spawnMarker.global_position)
-	
+
 	if !newInstance:
 		return false
-	
+
 	return true

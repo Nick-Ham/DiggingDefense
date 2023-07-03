@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://bwwibfq5coxla" path="res://Levels/Level.tscn" id="1_3p3gg"]
 [ext_resource type="PackedScene" uid="uid://cgut0xcs54mxi" path="res://Game/Character/Player/PlayerCharacter.tscn" id="2_16jdn"]
-[ext_resource type="PackedScene" uid="uid://baqmjhtlsul3y" path="res://Game/Spawner.tscn" id="3_nslh0"]
-[ext_resource type="PackedScene" uid="uid://k47oliu0gove" path="res://Game/HQ.tscn" id="4_4hk0a"]
+[ext_resource type="PackedScene" uid="uid://baqmjhtlsul3y" path="res://Game/Structures/Spawner.tscn" id="3_nslh0"]
+[ext_resource type="PackedScene" uid="uid://k47oliu0gove" path="res://Game/Structures/HQ.tscn" id="4_4hk0a"]
 
 [node name="TestLevel" instance=ExtResource("1_3p3gg")]
 y_sort_enabled = true

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cynpuh1elfgdl" path="res://Assets/Character/Shadow.png" id="1_4f8wt"]
 [ext_resource type="Texture2D" uid="uid://cem6pkrqwb353" path="res://Assets/Structures/HQ.png" id="1_34l8s"]
-[ext_resource type="Script" path="res://Game/HQ.gd" id="1_ifadx"]
+[ext_resource type="Script" path="res://Game/Structures/HQ.gd" id="1_ifadx"]
 [ext_resource type="PackedScene" uid="uid://bvlijjqv1mxbu" path="res://Game/Components/EnemyInformer.tscn" id="5_gs5tl"]
 [ext_resource type="PackedScene" uid="uid://1q2twk6ywl7d" path="res://Game/Components/HealthBar.tscn" id="5_lytth"]
 

@@ -1,29 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dwcw718g4fbcm"]
+[gd_scene load_steps=11 format=3 uid="uid://dwcw718g4fbcm"]
 
 [ext_resource type="PackedScene" uid="uid://bwwibfq5coxla" path="res://Levels/Level.tscn" id="1_pe5w4"]
-[ext_resource type="PackedScene" uid="uid://baqmjhtlsul3y" path="res://Game/Spawner.tscn" id="2_akrp5"]
+[ext_resource type="PackedScene" uid="uid://baqmjhtlsul3y" path="res://Game/Structures/Spawner.tscn" id="2_akrp5"]
 [ext_resource type="PackedScene" uid="uid://cgut0xcs54mxi" path="res://Game/Character/Player/PlayerCharacter.tscn" id="3_5t2h6"]
-[ext_resource type="PackedScene" uid="uid://k47oliu0gove" path="res://Game/HQ.tscn" id="3_pk7ut"]
+[ext_resource type="PackedScene" uid="uid://k47oliu0gove" path="res://Game/Structures/HQ.tscn" id="3_pk7ut"]
 [ext_resource type="PackedScene" uid="uid://cya314nb48ygd" path="res://Game/Turret/Turret.tscn" id="5_qx83t"]
-[ext_resource type="Script" path="res://WaveManager.gd" id="6_76boy"]
+[ext_resource type="Script" path="res://Game/WaveManager/WaveManager.gd" id="6_68k32"]
 [ext_resource type="PackedScene" uid="uid://c8xsie3eygt5v" path="res://Game/Character/Enemy/Zombie.tscn" id="7_j1ybt"]
-[ext_resource type="Script" path="res://WaveResource.gd" id="8_plv8c"]
 [ext_resource type="PackedScene" uid="uid://bche3u8a7xcmn" path="res://Game/Character/Enemy/EyeSquid.tscn" id="9_esd4b"]
-
-[sub_resource type="Resource" id="Resource_3mxf1"]
-script = ExtResource("8_plv8c")
-scene = ExtResource("7_j1ybt")
-count = 1000
-
-[sub_resource type="Resource" id="Resource_ha5of"]
-script = ExtResource("8_plv8c")
-scene = ExtResource("9_esd4b")
-count = 5
-
-[sub_resource type="Resource" id="Resource_dsf12"]
-script = ExtResource("8_plv8c")
-scene = ExtResource("7_j1ybt")
-count = 200
+[ext_resource type="Script" path="res://Game/WaveManager/Wave.gd" id="10_00m7r"]
+[ext_resource type="Script" path="res://Game/WaveManager/SpawnGroup.gd" id="11_0pdvi"]
 
 [node name="TestLevel" node_paths=PackedStringArray("waveManager") instance=ExtResource("1_pe5w4")]
 y_sort_enabled = true
@@ -34,7 +20,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Map" parent="." index="1"]
-layer_0/tile_data = PackedInt32Array(-65540, 0, 0, -65541, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -65539, 0, 0, 65533, 0, 0, 65532, 0, 0, 65531, 0, 0, -2, 0, 0, -1, 0, 0, 65534, 0, 0, -65536, 0, 0, -65535, 2, 0, -65534, 0, 0, -65538, 0, 0, -65537, 0, 0, 65535, 2, 0, -131070, 0, 0, -196605, 0, 0, -196606, 0, 0, -196607, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, 131067, 2, 0, 131068, 2, 0, 131069, 2, 0, 131070, 2, 0, 131071, 2, 0, 0, 0, 0, 1, 2, 0, 2, 0, 0, -65533, 0, 0, -131069, 2, 0, -131071, 2, 0, -131072, 2, 0, -196608, 2, 0, -262144, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 2, 0, -262140, 2, 0, -196604, 2, 0, -131073, 2, 0, -131074, 2, 0, -131075, 2, 0, -131076, 2, 0, -131077, 2, 0, -65542, 2, 0, -6, 2, 0, 65530, 2, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 131072, 2, 0, 131073, 2, 0, 131074, 2, 0, 65539, 2, 0, 3, 2, 0, -65532, 2, 0)
+layer_0/tile_data = PackedInt32Array(-65540, 0, 0, -65541, 0, 0, -5, 0, 0, -4, 0, 0, -3, 0, 0, -65539, 0, 0, 65533, 0, 0, 65532, 0, 0, 65531, 0, 0, -2, 0, 0, -1, 0, 0, 65534, 0, 0, -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65538, 0, 0, -65537, 0, 0, 65535, 2, 0, -131070, 2, 0, -196605, 0, 0, -196606, 0, 0, -196607, 0, 0, -262143, 0, 0, -262142, 0, 0, -262141, 0, 0, 131067, 2, 0, 131068, 2, 0, 131069, 2, 0, 131070, 2, 0, 131071, 2, 0, -131069, 2, 0, -131071, 2, 0, -131072, 2, 0, -196608, 2, 0, -262144, 2, 0, -327679, 2, 0, -327678, 2, 0, -327677, 2, 0, -262140, 2, 0, -196604, 0, 0, -131073, 2, 0, -131074, 2, 0, -131075, 2, 0, -131076, 2, 0, -131077, 2, 0, -65542, 2, 0, -6, 2, 0, 65530, 2, 0, -196603, 0, 0, -131067, 0, 0, -65531, 0, 0, -65532, 0, 0, -65533, 0, 0, -131068, 2, 0, -262139, 2, 0, -196602, 2, 0, -131066, 2, 0, -65530, 2, 0, 5, 2, 0, 4, 2, 0, 3, 2, 0, 2, 2, 0, 1, 2, 0, 0, 2, 0)
 metadata/_edit_lock_ = true
 
 [node name="PlayerCharacter" parent="." index="2" instance=ExtResource("3_5t2h6")]
@@ -50,10 +36,32 @@ position = Vector2(80, -112)
 position = Vector2(-48, -16)
 facing = 1
 
-[node name="Turret2" parent="." index="6" instance=ExtResource("5_qx83t")]
-position = Vector2(112, -16)
+[node name="WaveManager" type="Node" parent="." index="6"]
+script = ExtResource("6_68k32")
 
-[node name="WaveManager" type="Node" parent="." index="7" node_paths=PackedStringArray("spawner")]
-script = ExtResource("6_76boy")
-spawner = NodePath("../Spawner")
-waves = Array[ExtResource("8_plv8c")]([SubResource("Resource_3mxf1"), SubResource("Resource_ha5of"), SubResource("Resource_dsf12")])
+[node name="Wave" type="Node" parent="WaveManager" index="0"]
+script = ExtResource("10_00m7r")
+
+[node name="SpawnGroup" type="Node" parent="WaveManager/Wave" index="0" node_paths=PackedStringArray("spawner")]
+script = ExtResource("11_0pdvi")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("7_j1ybt")
+count = 50
+spawnInterval = 0.2
+
+[node name="Wave2" type="Node" parent="WaveManager" index="1"]
+script = ExtResource("10_00m7r")
+
+[node name="SpawnGroup" type="Node" parent="WaveManager/Wave2" index="0" node_paths=PackedStringArray("spawner")]
+script = ExtResource("11_0pdvi")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("7_j1ybt")
+count = 100
+spawnInterval = 0.2
+
+[node name="SpawnGroup2" type="Node" parent="WaveManager/Wave2" index="1" node_paths=PackedStringArray("spawner")]
+script = ExtResource("11_0pdvi")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("9_esd4b")
+count = 4
+spawnInterval = 2.5

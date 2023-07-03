@@ -4,6 +4,7 @@
 
 [node name="WaveStart" type="CanvasLayer" node_paths=PackedStringArray("button")]
 process_mode = 3
+visible = false
 script = ExtResource("1_mwdjq")
 button = NodePath("Control/Button")
 

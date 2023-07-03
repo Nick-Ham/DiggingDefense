@@ -16,3 +16,5 @@ func determineInputDirection():
 		setAction(true)
 	if Input.is_action_just_released("Space"):
 		setAction(false)
+	
+	

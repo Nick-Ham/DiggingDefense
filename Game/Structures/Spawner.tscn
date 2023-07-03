@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://baqmjhtlsul3y"]
 
-[ext_resource type="Script" path="res://Game/Spawner.gd" id="1_d6ylt"]
+[ext_resource type="Script" path="res://Game/Structures/Spawner.gd" id="1_d6ylt"]
 [ext_resource type="Texture2D" uid="uid://bkquji2fwjx7a" path="res://Assets/Structures/Spawner.png" id="2_nhy1f"]
 [ext_resource type="Texture2D" uid="uid://bjw3it2cf0wsb" path="res://Assets/Structures/Marker.png" id="3_qgvmq"]
 [ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="5_i52mn"]
@@ -14,7 +14,6 @@ script = ExtResource("1_d6ylt")
 spawnMarker = NodePath("SpawnMarker")
 sceneSpawner = NodePath("SceneSpawner")
 detector = NodePath("Detector")
-spawnLimit = 5
 
 [node name="SpawnMarker" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -28,7 +27,7 @@ texture = ExtResource("2_nhy1f")
 [node name="SceneSpawner" parent="." instance=ExtResource("5_i52mn")]
 scenePath = ExtResource("6_jnno5")
 spawnCount = 1
-spawnRadius = 15.0
+spawnRadius = 10.0
 
 [node name="Detector" type="Area2D" parent="."]
 collision_layer = 0
