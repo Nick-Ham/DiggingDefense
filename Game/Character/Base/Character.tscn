@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://y2js2cxripyg"]
+
+[ext_resource type="Script" path="res://Game/Character/Base/Character.gd" id="1_fqisc"]
+[ext_resource type="Texture2D" uid="uid://cynpuh1elfgdl" path="res://Assets/Character/Shadow.png" id="2_x4ji3"]
+[ext_resource type="Texture2D" uid="uid://bvc335c8l1js0" path="res://Assets/Character/Idle1.png" id="3_hoe0m"]
+[ext_resource type="Texture2D" uid="uid://jug404o2gqdc" path="res://Assets/Character/Walk1.png" id="4_4md0n"]
+[ext_resource type="Texture2D" uid="uid://b3utq3mlsknly" path="res://Assets/Character/Walk2.png" id="5_n23bt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ut4og"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hoe0m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_4md0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_n23bt")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v04ff"]
+radius = 4.0
+height = 8.0
+
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "visualCenterMarker")]
+collision_layer = 2
+collision_mask = 3
+floor_stop_on_slope = false
+floor_block_on_wall = false
+platform_on_leave = 2
+platform_floor_layers = 4294901760
+script = ExtResource("1_fqisc")
+sprite = NodePath("LeanPivot/CharacterSprite")
+visualCenterMarker = NodePath("VisualCenterMarker")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("2_x4ji3")
+
+[node name="LeanPivot" type="Node2D" parent="."]
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="LeanPivot"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_ut4og")
+animation = &"moving"
+
+[node name="MovementCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_v04ff")
+
+[node name="VisualCenterMarker" type="Marker2D" parent="."]
+position = Vector2(0, -5)

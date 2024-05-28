@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://baqmjhtlsul3y"]
+
+[ext_resource type="Script" path="res://Game/Structures/Spawner.gd" id="1_d6ylt"]
+[ext_resource type="Texture2D" uid="uid://bkquji2fwjx7a" path="res://Assets/Structures/Spawner.png" id="2_nhy1f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gj0qm"]
+radius = 20.0
+
+[node name="Spawner" type="Node2D" node_paths=PackedStringArray("detector")]
+script = ExtResource("1_d6ylt")
+detector = NodePath("Detector")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nhy1f")
+
+[node name="Detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+visible = false
+shape = SubResource("CircleShape2D_gj0qm")

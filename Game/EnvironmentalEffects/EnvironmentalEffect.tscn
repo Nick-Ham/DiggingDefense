@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b26rok3i656j0"]
+
+[ext_resource type="Script" path="res://Game/EnvironmentalEffects/EnvironmentalEffect.gd" id="1_0h6va"]
+[ext_resource type="Texture2D" uid="uid://be3r74s6iviqu" path="res://Assets/Env/EnvEffects/Slime.png" id="2_7dwrk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_351e3"]
+size = Vector2(30, 30)
+
+[node name="EnvironmentalEffect" type="Area2D"]
+z_index = -1
+collision_mask = 8
+script = ExtResource("1_0h6va")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_7dwrk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_351e3")

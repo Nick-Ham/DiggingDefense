@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv33qsqak8g42"]
+
+[ext_resource type="Script" path="res://Game/Components/HQFinder.gd" id="1_1ia3g"]
+
+[node name="HQFinder" type="Node2D" node_paths=PackedStringArray("navAgent")]
+script = ExtResource("1_1ia3g")
+navAgent = NodePath("NavigationAgent2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+target_desired_distance = 5.0
+radius = 50.0

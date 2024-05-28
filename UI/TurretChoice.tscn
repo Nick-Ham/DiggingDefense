@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://ydgvwq7h6nou"]
+
+[ext_resource type="Shader" path="res://Shader/Pixelate.gdshader" id="1_0fdp7"]
+[ext_resource type="Texture2D" uid="uid://cobvqvv0mkg8k" path="res://Assets/Turret/StaticTurret.png" id="1_4megk"]
+[ext_resource type="Script" path="res://UI/TurretChoice.gd" id="1_is0r8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kii4x"]
+shader = ExtResource("1_0fdp7")
+shader_parameter/amount = 8
+
+[sub_resource type="LabelSettings" id="LabelSettings_ykefu"]
+line_spacing = 1.0
+font_size = 12
+
+[node name="TurretChoice" type="MarginContainer" node_paths=PackedStringArray("button", "textureRect", "turretCost")]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+script = ExtResource("1_is0r8")
+button = NodePath("Button")
+textureRect = NodePath("Button/MarginContainer/TextureRect")
+turretCost = NodePath("Button/MarginContainer2/TurretCostLabel")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="Button/MarginContainer"]
+material = SubResource("ShaderMaterial_kii4x")
+layout_mode = 2
+texture = ExtResource("1_4megk")
+expand_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+
+[node name="TurretCostLabel" type="Label" parent="Button/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "?"
+label_settings = SubResource("LabelSettings_ykefu")
+horizontal_alignment = 2
+vertical_alignment = 2

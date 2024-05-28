@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bscdss0bs54yr"]
+
+[ext_resource type="Script" path="res://UI/LevelLostMenu.gd" id="1_ejtct"]
+
+[node name="LoseMenu" type="CanvasLayer" node_paths=PackedStringArray("restartButton", "quitButton")]
+process_mode = 3
+script = ExtResource("1_ejtct")
+restartButton = NodePath("VBoxContainer/MarginContainer2/RestartButton")
+quitButton = NodePath("VBoxContainer/MarginContainer3/QuitButton")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.380392)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Last HQ Lost"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/MarginContainer2"]
+layout_mode = 2
+text = " Restart Level "
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="QuitButton" type="Button" parent="VBoxContainer/MarginContainer3"]
+layout_mode = 2
+text = "Quit Level"

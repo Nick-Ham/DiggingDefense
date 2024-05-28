@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcw0px4hj2m02"]
+
+[ext_resource type="Texture2D" uid="uid://dkwkt5y8g6o3n" path="res://Assets/Turret/Fireball.png" id="1_uu3wa"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="3_2873y"]
+[ext_resource type="PackedScene" uid="uid://cdkpy77v72u7o" path="res://Game/Effects/FireEffect.tscn" id="4_jh5c3"]
+
+[sub_resource type="GDScript" id="GDScript_uy4rj"]
+script/source = "extends CharacterBody2D
+class_name Projectile
+
+@export var speed : int = 1
+@export var sprite : Sprite2D
+@export var effectSpawner : SceneSpawner
+
+var facing : Turret.DIRECTION = Turret.DIRECTION.RIGHT
+
+var movementDirection = {
+	Turret.DIRECTION.RIGHT : Vector2(1, 0),
+	Turret.DIRECTION.LEFT : Vector2(-1, 0),
+	Turret.DIRECTION.UP : Vector2(0, -1),
+	Turret.DIRECTION.DOWN : Vector2(0, 1)
+}
+
+func _physics_process(delta):
+	velocity = movementDirection[facing] * speed * delta
+	var collision = move_and_collide(velocity)
+	if collision:
+		queue_free()
+
+func setFacing(newFacing : Turret.DIRECTION):
+	facing = newFacing
+	updateDirection()
+
+func updateDirection():
+	if facing == Turret.DIRECTION.LEFT:
+		rotation_degrees = 180
+	elif facing == Turret.DIRECTION.RIGHT:
+		rotation_degrees = 0
+	elif facing == Turret.DIRECTION.UP:
+		rotation_degrees = -90
+	elif facing == Turret.DIRECTION.DOWN:
+		rotation_degrees = 90
+
+
+func _on_character_hit_box_body_entered(body):
+	var character = body as Character
+	if !character:
+		return
+
+	if character.characterType != Character.CHARACTER_TYPE.ENEMY:
+		return
+
+	var characterHealth : HealthBar
+	for child in character.get_children():
+		var healthBar = child as HealthBar
+		if healthBar:
+			characterHealth = healthBar
+
+	if !characterHealth:
+		return
+
+	var newEffect : Effect = effectSpawner.instanceScene(body, Vector2())
+	newEffect.setupEffect()
+
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ghd6m"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gah4h"]
+size = Vector2(16, 32)
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 0
+script = SubResource("GDScript_uy4rj")
+speed = 350
+sprite = Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(0, 0),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":ExtResource("1_uu3wa"),"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":null)
+
+effectSpawner = Object(Node,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","script":Resource("res://Game/Components/SceneSpawner.gd"),"scenePath":ExtResource("4_jh5c3"),"spawnCount":1,"spawnRadius":0.0)
+
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uu3wa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_ghd6m")
+
+[node name="CharacterHitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterHitBox"]
+shape = SubResource("RectangleShape2D_gah4h")
+
+[node name="SceneSpawner" parent="." instance=ExtResource("3_2873y")]
+scenePath = ExtResource("4_jh5c3")
+spawnCount = 1
+
+[connection signal="body_entered" from="CharacterHitBox" to="." method="_on_character_hit_box_body_entered"]

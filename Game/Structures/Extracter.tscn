@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj4sjaallyv65"]
+
+[ext_resource type="Script" path="res://Game/Structures/Extracter.gd" id="1_ub4he"]
+[ext_resource type="Texture2D" uid="uid://nxx6g4umbwv6" path="res://Assets/Structures/Extracter.png" id="2_ihf21"]
+
+[node name="Extracter" type="Node2D"]
+script = ExtResource("1_ub4he")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ihf21")

@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://rmk2clo0edfv"]
+
+[ext_resource type="PackedScene" uid="uid://dg2k20bctqrol" path="res://Game/Effects/Effect.tscn" id="1_y63bv"]
+[ext_resource type="Script" path="res://Game/Effects/SlimedEffect.gd" id="2_bu56y"]
+[ext_resource type="Material" uid="uid://cjsrlnn2hwboa" path="res://Game/Effects/SlimedEffect.tres" id="3_m2ne4"]
+[ext_resource type="Texture2D" uid="uid://dc7mdoiou0s0i" path="res://Assets/Effects/Slimed.png" id="4_60s14"]
+
+[node name="SlimedEffect" instance=ExtResource("1_y63bv")]
+script = ExtResource("2_bu56y")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="0"]
+amount = 2
+process_material = ExtResource("3_m2ne4")
+texture = ExtResource("4_60s14")
+speed_scale = 0.5
+explosiveness = 0.8
+local_coords = true
+
+[node name="Lifetime" parent="." index="1"]
+lifetimeDuration = 4.0

@@ -1,0 +1,48 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://cluscdlfg2fg3"]
+
+[ext_resource type="Texture2D" uid="uid://blvv3oio52kqo" path="res://Assets/Env/DefaultAtlas.png" id="1_8gilq"]
+[ext_resource type="PackedScene" uid="uid://chwtmnjh8fpaj" path="res://Game/EnvironmentalEffects/SlimeEnvironmentalEffect.tscn" id="2_tskm0"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sti7o"]
+vertices = PackedVector2Array(4, -4, 16, -4, 16, 4, 4, 4, 4, 16, -4, 16, -4, 4, -4, -4, -16, 4, -16, -4, 4, -16, -4, -16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(3, 4, 5, 6), PackedInt32Array(0, 3, 6, 7), PackedInt32Array(6, 8, 9, 7), PackedInt32Array(10, 0, 7, 11)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -4, -4, -4, -4, -16, 4, -16, 4, -4, 16, -4, 16, 4, 4, 4, 4, 16, -4, 16, -4, 4, -16, 4)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1vuue"]
+resource_name = "DefaultAtlas"
+texture = ExtResource("1_8gilq")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_sti7o")
+0:0/0/custom_data_0 = "Dirt"
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-12, 16, -16, 12, -16, -12, -12, -16, 12, -16, 16, -12, 16, 12, 12, 16)
+0:1/0/custom_data_0 = "DirtWall"
+0:2/0 = 0
+0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:2/0/physics_layer_0/angular_velocity = 0.0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:2/0/custom_data_0 = "Bedrock"
+3:3/0 = 0
+3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:3/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_71if3"]
+resource_name = "Effects"
+scenes/1/scene = ExtResource("2_tskm0")
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
+navigation_layer_0/layers = 1
+custom_data_layer_0/name = "TileName"
+custom_data_layer_0/type = 4
+sources/1 = SubResource("TileSetAtlasSource_1vuue")
+sources/2 = SubResource("TileSetScenesCollectionSource_71if3")

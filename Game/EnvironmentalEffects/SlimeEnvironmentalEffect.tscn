@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://chwtmnjh8fpaj"]
+
+[ext_resource type="PackedScene" uid="uid://b26rok3i656j0" path="res://Game/EnvironmentalEffects/EnvironmentalEffect.tscn" id="1_8ku08"]
+[ext_resource type="Script" path="res://Game/EnvironmentalEffects/SlimeEnvironmentalEffect.gd" id="2_ab5u5"]
+[ext_resource type="Script" path="res://Game/Components/SceneSpawner.gd" id="3_nrq36"]
+[ext_resource type="PackedScene" uid="uid://rmk2clo0edfv" path="res://Game/Effects/SlimedEffect.tscn" id="4_1b8ii"]
+
+[node name="SlimeEnvironmentalEffect" node_paths=PackedStringArray("effectSpawner") instance=ExtResource("1_8ku08")]
+script = ExtResource("2_ab5u5")
+effectSpawner = NodePath("EffectSpawner")
+effectName = "Slime"
+
+[node name="EffectSpawner" type="Node" parent="." index="2"]
+script = ExtResource("3_nrq36")
+scenePath = ExtResource("4_1b8ii")
+spawnCount = 1

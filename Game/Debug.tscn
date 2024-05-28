@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnpd1vprqtkg0"]
+
+[ext_resource type="Script" path="res://Game/DEBUG.gd" id="1_8leai"]
+
+[node name="DEBUG" type="CanvasLayer" node_paths=PackedStringArray("debugText")]
+script = ExtResource("1_8leai")
+debugText = NodePath("VBoxContainer/DebugText")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DebugText" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+text = "Debug On"
+fit_content = true

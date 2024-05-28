@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bpcsqpoh1xapp"]
+
+[ext_resource type="PackedScene" uid="uid://y2js2cxripyg" path="res://Game/Character/Base/Character.tscn" id="1_h6vsy"]
+[ext_resource type="Texture2D" uid="uid://d0a27yvt04gtj" path="res://Assets/Enemy/Zombie/ZombieWalk1.png" id="2_5imao"]
+[ext_resource type="Script" path="res://Game/Character/Enemy/EnemyCharacter.gd" id="2_dpccu"]
+[ext_resource type="Texture2D" uid="uid://de7ygycx72fvv" path="res://Assets/Enemy/Zombie/ZombieWalk2.png" id="3_nmdoh"]
+[ext_resource type="PackedScene" uid="uid://dq34wms54pny7" path="res://Game/Components/Damage.tscn" id="5_b6ct2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8qp2x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5imao")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5imao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nmdoh")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[node name="EnemyCharacter" node_paths=PackedStringArray("damage") instance=ExtResource("1_h6vsy")]
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("2_dpccu")
+damage = NodePath("Damage")
+characterType = 1
+
+[node name="CharacterSprite" parent="LeanPivot" index="0"]
+sprite_frames = SubResource("SpriteFrames_8qp2x")
+
+[node name="Damage" parent="." index="3" instance=ExtResource("5_b6ct2")]
+damageValue = 1

@@ -1,0 +1,68 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv2w7pdpqg7kq"]
+
+[ext_resource type="Script" path="res://UI/MapAlterMenu.gd" id="1_s8dgv"]
+
+[node name="MapAlterMenu" type="Control" node_paths=PackedStringArray("createTurretButton", "createExtractorButton", "breakWallButton")]
+top_level = true
+z_index = 100
+layout_mode = 3
+anchor_right = 0.07
+anchor_bottom = 0.1
+offset_right = 1.60001
+script = ExtResource("1_s8dgv")
+createTurretButton = NodePath("Control/MarginContainer/VBoxContainer/CreateTurretButton")
+createExtractorButton = NodePath("Control/MarginContainer/VBoxContainer/CreateExtracterButton")
+breakWallButton = NodePath("Control/MarginContainer/VBoxContainer/BreakWallButton")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(140, 136)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 4.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Edit Menu"
+horizontal_alignment = 1
+
+[node name="CreateTurretButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Create Turret"
+
+[node name="CreateExtracterButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Create Extracter"
+
+[node name="BreakWallButton" type="Button" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Break Wall"

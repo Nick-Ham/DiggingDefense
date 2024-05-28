@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3poa5ojvxt5w"]
+
+[ext_resource type="Script" path="res://Game/Turret/StaticTurret.gd" id="1_ndqu8"]
+[ext_resource type="Texture2D" uid="uid://cobvqvv0mkg8k" path="res://Assets/Turret/StaticTurret.png" id="2_lp1bl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_es1hn"]
+size = Vector2(86, 86)
+
+[node name="StaticTurret" type="Area2D" node_paths=PackedStringArray("sprite", "turretLaserStart", "attackLine", "reloadTimer")]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_ndqu8")
+sprite = NodePath("Sprite2D")
+turretLaserStart = NodePath("Marker2D")
+attackLine = NodePath("AttackLine")
+reloadTimer = NodePath("ReloadTimer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lp1bl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_es1hn")
+
+[node name="AttackLine" type="Line2D" parent="."]
+width = 0.8
+default_color = Color(0.309804, 0.721569, 1, 0.839216)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -13)
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

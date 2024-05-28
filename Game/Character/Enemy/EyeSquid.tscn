@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://bche3u8a7xcmn"]
+
+[ext_resource type="PackedScene" uid="uid://bpcsqpoh1xapp" path="res://Game/Character/Enemy/EnemyCharacter.tscn" id="1_1hsrp"]
+[ext_resource type="Texture2D" uid="uid://d03rclp563q7y" path="res://Assets/Enemy/EyeSquid/idle1.png" id="2_crvf0"]
+[ext_resource type="Script" path="res://Game/Character/Enemy/EyeSquid.gd" id="2_nf2gx"]
+[ext_resource type="Texture2D" uid="uid://5ddmf76yu0mt" path="res://Assets/Enemy/EyeSquid/idle2.png" id="3_qgbc8"]
+[ext_resource type="Texture2D" uid="uid://b5jswv6xg6kf2" path="res://Assets/Enemy/EyeSquid/idle3.png" id="4_62lrl"]
+[ext_resource type="Texture2D" uid="uid://dxck0vxcrp5th" path="res://Assets/Enemy/EyeSquid/idle4.png" id="5_iskpj"]
+[ext_resource type="Texture2D" uid="uid://cbyl0vymxv6sy" path="res://Assets/Enemy/EyeSquid/idle5.png" id="6_cawo4"]
+[ext_resource type="Texture2D" uid="uid://ddubjee2cqe5e" path="res://Assets/Enemy/EyeSquid/idle6.png" id="7_02kgk"]
+[ext_resource type="PackedScene" uid="uid://bv33qsqak8g42" path="res://Game/Components/HQFinder.tscn" id="10_qfrq6"]
+[ext_resource type="Script" path="res://Game/Components/Controllers/EnemyController.gd" id="11_2hslb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x01ml"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_crvf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qgbc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_62lrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iskpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cawo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_02kgk")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_crvf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qgbc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_62lrl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iskpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cawo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_02kgk")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 10.0
+}]
+
+[node name="EyeSquid" instance=ExtResource("1_1hsrp")]
+script = ExtResource("2_nf2gx")
+ACCELERATION = 900.0
+MAX_SPEED = 50.0
+
+[node name="Shadow" parent="." index="0"]
+position = Vector2(0, 0)
+
+[node name="LeanPivot" parent="." index="1"]
+position = Vector2(0, -1)
+
+[node name="CharacterSprite" parent="LeanPivot" index="0"]
+sprite_frames = SubResource("SpriteFrames_x01ml")
+frame_progress = 0.925313
+
+[node name="Damage" parent="." index="3"]
+damageValue = 3
+
+[node name="HQFinder" parent="." index="4" instance=ExtResource("10_qfrq6")]
+
+[node name="EnemyController" type="Node" parent="." index="5" node_paths=PackedStringArray("hqFinder")]
+script = ExtResource("11_2hslb")
+hqFinder = NodePath("../HQFinder")

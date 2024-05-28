@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="TurretCollection" load_steps=6 format=3 uid="uid://dvb5vqkvel8fy"]
+
+[ext_resource type="Script" path="res://Resources/TurretCollection.gd" id="1_xm1w2"]
+[ext_resource type="PackedScene" uid="uid://b3poa5ojvxt5w" path="res://Game/Turret/StaticTurret.tscn" id="2_s6xg4"]
+[ext_resource type="Script" path="res://Resources/TurretData.gd" id="3_i236k"]
+[ext_resource type="Texture2D" uid="uid://cobvqvv0mkg8k" path="res://Assets/Turret/StaticTurret.png" id="4_ma8k8"]
+
+[sub_resource type="Resource" id="Resource_uebfc"]
+script = ExtResource("3_i236k")
+name = "StaticTurret"
+baseCost = 4
+texture = ExtResource("4_ma8k8")
+packedScene = ExtResource("2_s6xg4")
+
+[resource]
+script = ExtResource("1_xm1w2")
+turrets = Array[ExtResource("3_i236k")]([SubResource("Resource_uebfc")])

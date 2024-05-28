@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmkmh042x1voh"]
+
+[ext_resource type="Script" path="res://UI/TurretChoiceSelector.gd" id="1_yiuca"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pbf46"]
+font_size = 12
+
+[node name="TurretChoiceSelector" type="Control" node_paths=PackedStringArray("gridContainer")]
+z_index = 100
+layout_mode = 3
+anchors_preset = 0
+offset_right = 110.0
+offset_bottom = 133.0
+mouse_filter = 1
+script = ExtResource("1_yiuca")
+gridContainer = NodePath("VBoxContainer/MarginContainer/GridContainer")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_top = -22.0
+offset_right = 111.0
+offset_bottom = 110.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+text = "Select Turret"
+label_settings = SubResource("LabelSettings_pbf46")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(105, 105)
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(105, 0)
+layout_mode = 2
+columns = 3

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://vbw8yv56shao"]
+
+[ext_resource type="Script" path="res://Game/Effects/ChainLightningEffect.gd" id="1_ame4i"]
+[ext_resource type="Script" path="res://Game/Components/Damage.gd" id="2_sgbvl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm2ls"]
+radius = 25.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2hr3"]
+
+[node name="ChainLightningEffect" type="Node2D" node_paths=PackedStringArray("jumpArea", "damage", "line")]
+script = ExtResource("1_ame4i")
+jumpDelay = 0.02
+jumpArea = NodePath("JumpArea")
+damage = NodePath("Damage")
+line = NodePath("LightningLine")
+
+[node name="JumpArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpArea"]
+visible = false
+shape = SubResource("CircleShape2D_wm2ls")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("2_sgbvl")
+damageValue = 1
+
+[node name="LightningLine" type="Line2D" parent="."]
+visible = false
+z_index = 100
+material = SubResource("ShaderMaterial_q2hr3")
+points = PackedVector2Array(-4, -18, 28, -21, 58, 15, 47, 33)
+width = 1.0
+default_color = Color(0.4, 1, 0.960784, 1)

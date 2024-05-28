@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://b7paiyhpriid4"]
+
+[ext_resource type="Script" path="res://Game/Character/Enemy/Zombie.gd" id="1_juj4j"]
+[ext_resource type="Script" path="res://Game/Components/Health.gd" id="2_8tlqh"]
+[ext_resource type="PackedScene" uid="uid://24jdvdvf84h7" path="res://UI/HealthBar.tscn" id="3_v0eli"]
+[ext_resource type="Texture2D" uid="uid://cynpuh1elfgdl" path="res://Assets/Character/Shadow.png" id="4_dw8yg"]
+[ext_resource type="Script" path="res://Game/Components/Damage.gd" id="4_t4d6y"]
+[ext_resource type="Texture2D" uid="uid://d0a27yvt04gtj" path="res://Assets/Enemy/Zombie/ZombieWalk1.png" id="6_mc4pl"]
+[ext_resource type="Texture2D" uid="uid://de7ygycx72fvv" path="res://Assets/Enemy/Zombie/ZombieWalk2.png" id="7_4ajq6"]
+[ext_resource type="PackedScene" uid="uid://bv33qsqak8g42" path="res://Game/Components/HQFinder.tscn" id="8_e6c4j"]
+[ext_resource type="Script" path="res://Game/Components/Controllers/EnemyController.gd" id="9_bp8yc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_frdco"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mc4pl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_mc4pl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4ajq6")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpbc7"]
+radius = 4.0
+height = 8.0
+
+[node name="ZombieCharacter" type="CharacterBody2D" node_paths=PackedStringArray("damage", "health", "sprite", "visualCenterMarker")]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_juj4j")
+damage = NodePath("Damage")
+health = NodePath("Health")
+ACCELERATION = 700.0
+MAX_SPEED = 50.0
+sprite = NodePath("LeanPivot/CharacterSprite")
+visualCenterMarker = NodePath("VisualCenterMarker")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2_8tlqh")
+maxHealth = 25
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("targetHealth") instance=ExtResource("3_v0eli")]
+position = Vector2(0, -15)
+scale = Vector2(0.08, 0.08)
+visibleAlways = false
+targetHealth = NodePath("../Health")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -3)
+texture = ExtResource("4_dw8yg")
+
+[node name="Damage" type="Node" parent="."]
+script = ExtResource("4_t4d6y")
+damageValue = 1
+
+[node name="LeanPivot" type="Node2D" parent="."]
+
+[node name="CharacterSprite" type="AnimatedSprite2D" parent="LeanPivot"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_frdco")
+animation = &"moving"
+
+[node name="VisualCenterMarker" type="Marker2D" parent="."]
+position = Vector2(0, -7)
+
+[node name="HQFinder" parent="." instance=ExtResource("8_e6c4j")]
+
+[node name="EnemyController" type="Node" parent="." node_paths=PackedStringArray("hqFinder")]
+script = ExtResource("9_bp8yc")
+hqFinder = NodePath("../HQFinder")
+
+[node name="MovementCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_rpbc7")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cctrbvoau6bb3"]
+
+[ext_resource type="Script" path="res://UI/MainMenu.gd" id="1_c3vim"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ksomj"]
+font_size = 50
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_266o1"]
+
+[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("startGameButton")]
+script = ExtResource("1_c3vim")
+startGameButton = NodePath("Control/MarginContainer/VBoxContainer/MarginContainer/StartGameButton")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Title" type="Label" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Digging Defense"
+label_settings = SubResource("LabelSettings_ksomj")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+theme_override_styles/separator = SubResource("StyleBoxEmpty_266o1")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 10
+
+[node name="StartGameButton" type="Button" parent="Control/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Start Game"

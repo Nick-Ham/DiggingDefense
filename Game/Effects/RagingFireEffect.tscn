@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr2fjwgp5pvd2"]
+
+[ext_resource type="PackedScene" uid="uid://dg2k20bctqrol" path="res://Game/Effects/Effect.tscn" id="1_kbru8"]
+[ext_resource type="Script" path="res://Game/Effects/RagingFireEffect.gd" id="2_j6efv"]
+[ext_resource type="Material" uid="uid://q6j84kd6iuwm" path="res://Game/Effects/FireEffect.tres" id="3_ratrb"]
+[ext_resource type="Texture2D" uid="uid://dsil3l5hhlkbp" path="res://Assets/Effects/RagingFire.png" id="4_pxn8s"]
+[ext_resource type="PackedScene" uid="uid://dq34wms54pny7" path="res://Game/Components/Damage.tscn" id="5_cxbpe"]
+
+[node name="RagingFireEffect" node_paths=PackedStringArray("damage", "fireTick") instance=ExtResource("1_kbru8")]
+script = ExtResource("2_j6efv")
+damage = NodePath("Damage")
+fireTick = NodePath("FireTick")
+
+[node name="FireTick" type="Timer" parent="." index="0"]
+wait_time = 0.25
+autostart = true
+
+[node name="Damage" parent="." index="1" instance=ExtResource("5_cxbpe")]
+damageValue = 2
+
+[node name="Lifetime" parent="." index="2"]
+lifetimeDuration = 4.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="3"]
+amount = 3
+process_material = ExtResource("3_ratrb")
+texture = ExtResource("4_pxn8s")
+lifetime = 0.5
+local_coords = true

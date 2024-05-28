@@ -1,0 +1,6 @@
+res://Levels/TestLevels/TestLevel2.tscn
+res://Resources/BaseGameTurretCollection.tres
+res://Shader/Pixelate.gdshader
+res://Game/Effects/SlimedEffect.tres
+res://Levels/BaseTileSet.tres
+res://Game/GameInstance.gd

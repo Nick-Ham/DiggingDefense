@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdkpy77v72u7o"]
+
+[ext_resource type="PackedScene" uid="uid://dg2k20bctqrol" path="res://Game/Effects/Effect.tscn" id="1_rcsr5"]
+[ext_resource type="Script" path="res://Game/Effects/FireEffect.gd" id="2_a1pjw"]
+[ext_resource type="Material" uid="uid://q6j84kd6iuwm" path="res://Game/Effects/FireEffect.tres" id="3_0gy4e"]
+[ext_resource type="Texture2D" uid="uid://bg33ohnk3qlgu" path="res://Assets/Effects/OnFire.png" id="4_77tjp"]
+[ext_resource type="PackedScene" uid="uid://dq34wms54pny7" path="res://Game/Components/Damage.tscn" id="5_52h34"]
+[ext_resource type="PackedScene" path="res://Game/Components/SceneSpawner.tscn" id="6_qbnbj"]
+[ext_resource type="PackedScene" uid="uid://cr2fjwgp5pvd2" path="res://Game/Effects/RagingFireEffect.tscn" id="7_2f1hv"]
+
+[node name="FireEffect" node_paths=PackedStringArray("damage", "fireTick", "ragingFireEffectSpawner") instance=ExtResource("1_rcsr5")]
+script = ExtResource("2_a1pjw")
+damage = NodePath("Damage")
+fireTick = NodePath("FireTick")
+ragingFireEffectSpawner = NodePath("RagingFireEffectSpawner")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="0"]
+amount = 3
+process_material = ExtResource("3_0gy4e")
+texture = ExtResource("4_77tjp")
+local_coords = true
+
+[node name="FireTick" type="Timer" parent="." index="1"]
+wait_time = 0.25
+autostart = true
+
+[node name="Damage" parent="." index="2" instance=ExtResource("5_52h34")]
+damageValue = 1
+
+[node name="RagingFireEffectSpawner" parent="." index="4" instance=ExtResource("6_qbnbj")]
+scenePath = ExtResource("7_2f1hv")
+spawnCount = 1

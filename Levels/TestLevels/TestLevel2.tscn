@@ -1,0 +1,91 @@
+[gd_scene load_steps=13 format=3 uid="uid://baplpp02mfsw"]
+
+[ext_resource type="Script" path="res://Levels/Level.gd" id="1_i433f"]
+[ext_resource type="Script" path="res://Resources/LevelSettings.gd" id="2_cjqhs"]
+[ext_resource type="Texture2D" uid="uid://3wd34d2wkcl4" path="res://Assets/Env/Void.png" id="2_uykh8"]
+[ext_resource type="Script" path="res://Game/Managers/WaveManager/WaveManager.gd" id="3_tqfkd"]
+[ext_resource type="Script" path="res://Game/Managers/WaveManager/Wave.gd" id="4_8jesy"]
+[ext_resource type="Script" path="res://Game/Managers/WaveManager/SpawnGroup.gd" id="5_8jmjb"]
+[ext_resource type="PackedScene" uid="uid://b7paiyhpriid4" path="res://Game/Character/Enemy/ZombieCharacter.tscn" id="6_82wbs"]
+[ext_resource type="PackedScene" uid="uid://dfdx8kb4ae088" path="res://Levels/GameMap.tscn" id="7_iqi3s"]
+[ext_resource type="Environment" uid="uid://drelx16t4ib07" path="res://Levels/BaseWorldEnvironment.tres" id="10_0vnoe"]
+[ext_resource type="PackedScene" uid="uid://k47oliu0gove" path="res://Game/Structures/HQ.tscn" id="10_fbt2b"]
+[ext_resource type="PackedScene" uid="uid://baqmjhtlsul3y" path="res://Game/Structures/Spawner.tscn" id="11_ojaw8"]
+
+[sub_resource type="Resource" id="Resource_pd01h"]
+script = ExtResource("2_cjqhs")
+initialOre = 8
+hqIncome = 1
+extracterIncome = 1
+extracterCost = 4
+
+[node name="TestLevel2" type="Node2D" node_paths=PackedStringArray("spawners", "hqs", "map", "waveManager")]
+y_sort_enabled = true
+texture_filter = 1
+script = ExtResource("1_i433f")
+levelSettings = SubResource("Resource_pd01h")
+spawners = [NodePath("Spawner")]
+hqs = [NodePath("HQ")]
+map = NodePath("GameMap")
+waveManager = NodePath("WaveManager")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -4096
+texture_repeat = 2
+texture = ExtResource("2_uykh8")
+region_enabled = true
+region_rect = Rect2(0, 0, 2048, 2048)
+metadata/_edit_lock_ = true
+
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("3_tqfkd")
+
+[node name="Wave" type="Node" parent="WaveManager"]
+script = ExtResource("4_8jesy")
+
+[node name="SpawnGroup" type="Node" parent="WaveManager/Wave" node_paths=PackedStringArray("spawner")]
+script = ExtResource("5_8jmjb")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("6_82wbs")
+count = 5
+spawnInterval = 2.0
+
+[node name="Wave2" type="Node" parent="WaveManager"]
+script = ExtResource("4_8jesy")
+
+[node name="SpawnGroup2" type="Node" parent="WaveManager/Wave2" node_paths=PackedStringArray("spawner")]
+script = ExtResource("5_8jmjb")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("6_82wbs")
+count = 10
+spawnInterval = 1.5
+
+[node name="Wave3" type="Node" parent="WaveManager"]
+script = ExtResource("4_8jesy")
+
+[node name="SpawnGroup2" type="Node" parent="WaveManager/Wave3" node_paths=PackedStringArray("spawner")]
+script = ExtResource("5_8jmjb")
+spawner = NodePath("../../../Spawner")
+scene = ExtResource("6_82wbs")
+count = 20
+spawnInterval = 0.5
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(32, -88)
+zoom = Vector2(2, 2)
+
+[node name="GameMap" parent="." instance=ExtResource("7_iqi3s")]
+layer_0/tile_data = PackedInt32Array(-262147, 1, 0, -262146, 1, 0, -262145, 1, 0, -393213, 1, 0, -327677, 1, 0, -262141, 1, 0, -196607, 1, 0, -131071, 1, 0, 2, 1, 0, -458752, 1, 0, -458751, 1, 0, -458750, 1, 0, -458749, 1, 0, -327681, 1, 0, -393217, 1, 0, -262143, 1, 0, -262142, 1, 0, -65534, 1, 0, 1, 1, 0, 65537, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 65539, 1, 0, 3, 1, 0, 65538, 1, 0, -131070, 1, 0, -327682, 1, 0, -393218, 1, 1, -458753, 1, 0, -524288, 1, 0, -524287, 1, 0, -524286, 1, 0, -327676, 1, 0, -327683, 1, 0, -262148, 1, 0, -196612, 1, 0, -196611, 1, 0, -196610, 1, 0, -327684, 1, 0, -393219, 1, 1, -393220, 1, 1, -327685, 1, 1, -262149, 1, 1, -196613, 1, 1, -131076, 1, 1, -131075, 1, 1, -131074, 1, 1, -196609, 1, 1, -327680, 1, 1, -393216, 1, 1, -393215, 1, 1, -393214, 1, 1, -327678, 1, 1, -327679, 1, 1, -262144, 1, 1, -196608, 1, 1, -131072, 1, 1, -65535, 1, 1, 0, 1, 1, 65536, 1, 1, 131072, 1, 1, 196609, 1, 1, 196610, 1, 1, 196611, 1, 1, 131076, 1, 1, 65540, 1, 1, 4, 1, 1, -65533, 1, 1, -131069, 1, 1, -196606, 1, 1, -196605, 1, 1, -262140, 1, 1, -327675, 1, 1, -393212, 1, 1, -458748, 1, 1, -524285, 1, 1, -589822, 1, 1, -589823, 1, 1, -589824, 1, 1, -524289, 1, 1, -458754, 1, 1, -131073, 1, 1, -65537, 1, 1, -1, 1, 1, -65538, 1, 1, -2, 1, 1, -65536, 1, 1, -65539, 1, 1, -196604, 1, 1, -131068, 1, 1, -65532, 1, 1, -262139, 1, 1, -393211, 1, 1, 196608, 1, 1, 131071, 1, 1, 65535, 1, 1, 196607, 1, 2, 262143, 1, 2, 262144, 1, 2, 262145, 1, 2, 262146, 1, 2, 262147, 1, 2, 196612, 1, 2, 131077, 1, 2, 65541, 1, 2, 5, 1, 2, -65531, 1, 2, -131067, 1, 2, -196603, 1, 2, -262138, 1, 2, -327674, 1, 2, -393210, 1, 2, -458747, 1, 2, -524284, 1, 2, -589821, 1, 2, -655358, 1, 2, -655359, 1, 2, -655360, 1, 2, -589825, 1, 2, -524290, 1, 2, -458755, 1, 2, -393221, 1, 2, -458756, 1, 2, -327686, 1, 2, -262150, 1, 2, -196614, 1, 2, -131077, 1, 2, -65540, 1, 2, -3, 1, 2, 65534, 1, 2, 131070, 1, 2)
+layer_1/tile_data = PackedInt32Array(-327679, 2, 65536)
+layer_2/tile_data = PackedInt32Array(131072, 196609, 3)
+
+[node name="HQ" parent="." instance=ExtResource("10_fbt2b")]
+position = Vector2(80, 48)
+
+[node name="Spawner" parent="." instance=ExtResource("11_ojaw8")]
+position = Vector2(-80, -144)
+spawnLimit = 100
+spawnRadius = 8.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("10_0vnoe")
