@@ -1,3 +1,4 @@
+@icon("res://Assets/Icons/DamageIcon.png")
 extends Node
 class_name Damage
 

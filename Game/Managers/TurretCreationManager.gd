@@ -14,15 +14,25 @@ class TileConditions:
 
 var currentMapAlterMenu : MapAlterMenu = null
 var currentTurretChoiceMenu : TurretChoiceSelector = null
+var currentaDirectionalTurretPlacer : DirectionalTurretPlacementHelper = null
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("MouseClickRight"):
-		if currentTurretChoiceMenu:
+		if is_instance_valid(currentTurretChoiceMenu):
 			currentTurretChoiceMenu.cancelChoose()
 			currentTurretChoiceMenu = null
 			return
 
+		if is_instance_valid(currentaDirectionalTurretPlacer):
+			currentaDirectionalTurretPlacer.cancelPlacement()
+			currentaDirectionalTurretPlacer = null
+			return
+
 		summonMapAlterMenu()
+
+	if event.is_action_pressed("MouseClickLeft"):
+		if is_instance_valid(currentaDirectionalTurretPlacer):
+			currentaDirectionalTurretPlacer.placeTurret()
 
 func determineTileConditions(inMapPosition : Vector2i) -> TileConditions:
 	var level : Level = get_tree().current_scene as Level
@@ -108,6 +118,20 @@ func _on_open_turret_select(inTargetTile : Vector2i) -> void:
 	Util.safeConnect(currentTurretChoiceMenu.turret_selected, _on_turret_selected)
 
 func _on_turret_selected(inSelectedTurretData : TurretData, inTargetTile : Vector2i) -> void:
+	if inSelectedTurretData.useDirectionalPlacement:
+		createDirectionalTurret(inSelectedTurretData, inTargetTile)
+	else:
+		createTurret(inSelectedTurretData, inTargetTile)
+
+	currentTurretChoiceMenu.queue_free()
+	currentTurretChoiceMenu = null
+
+func createDirectionalTurret(inSelectedTurretData : TurretData, inTargetTile : Vector2i) -> void:
+	currentaDirectionalTurretPlacer = DirectionalTurretPlacementHelper.new()
+	add_child(currentaDirectionalTurretPlacer)
+	currentaDirectionalTurretPlacer.startPlacement(inSelectedTurretData, inTargetTile)
+
+func createTurret(inSelectedTurretData : TurretData, inTargetTile : Vector2i) -> void:
 	var level : Level = get_tree().current_scene as Level
 	var map : Map = level.getMap()
 
@@ -115,9 +139,8 @@ func _on_turret_selected(inSelectedTurretData : TurretData, inTargetTile : Vecto
 	if spawnSuccess:
 		var walletManager : WalletManager = level.getWalletManager()
 		walletManager.pay(inSelectedTurretData.baseCost)
-
-	currentTurretChoiceMenu.queue_free()
-	currentTurretChoiceMenu = null
+		var turret : Turret = map.getTurretAtPosition(inTargetTile) as Turret
+		turret.initializeTurret()
 
 func _on_break_wall(inMapCoord : Vector2i) -> void:
 	var level : Level = get_tree().current_scene as Level

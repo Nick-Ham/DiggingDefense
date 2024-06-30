@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://do0ueyqcpcu5s"]
+
+[ext_resource type="Script" path="res://Game/Turret/FireballTurret.gd" id="1_kvc0d"]
+[ext_resource type="Texture2D" uid="uid://6or8isj0wsgb" path="res://Assets/Turret/FireballTurret.png" id="2_k5q76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epdii"]
+resource_local_to_scene = true
+
+[node name="FireballTurret" type="Node2D" node_paths=PackedStringArray("enemyDetector", "reloadTimer", "rangeDetectorRayCast", "collisionShape")]
+script = ExtResource("1_kvc0d")
+enemyDetector = NodePath("EnemyDetector")
+reloadTimer = NodePath("ReloadTimer")
+rangeDetectorRayCast = NodePath("RayCast2D")
+collisionShape = NodePath("EnemyDetector/CollisionShape2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k5q76")
+
+[node name="EnemyDetector" type="Area2D" parent="."]
+position = Vector2(10, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetector"]
+shape = SubResource("RectangleShape2D_epdii")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(24, 0)
+target_position = Vector2(500, 0)
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true

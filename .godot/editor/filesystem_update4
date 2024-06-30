@@ -1,6 +1,8 @@
 res://Levels/TestLevels/TestLevel2.tscn
-res://Resources/BaseGameTurretCollection.tres
+res://Game/Effects/FireEffect.tres
 res://Shader/Pixelate.gdshader
+res://Shader/Hologram.tres
+res://Resources/BaseGameTurretCollection.tres
 res://Game/Effects/SlimedEffect.tres
 res://Levels/BaseTileSet.tres
-res://Game/GameInstance.gd
+res://Game/Effects/ChainLightningEffect.tscn

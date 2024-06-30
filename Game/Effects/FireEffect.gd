@@ -1,15 +1,17 @@
 extends Effect
 class_name FireEffect
 
+@export_category("Local")
 @export var damage : Damage
 @export var fireTick : Timer
-@export var ragingFireEffectSpawner : SceneSpawner
+
+var ragingFireEffectPacked : PackedScene = preload("res://Game/Effects/RagingFireEffect.tscn")
 
 func _ready():
 	fireTick.timeout.connect(_on_timer_timeout)
+	setupEffect()
 
 func setupEffect():
-	super()
 	damage.dealDamage(get_parent())
 
 	for each in get_parent().get_children():
@@ -25,8 +27,12 @@ func setupEffect():
 			wasSlimed = true
 
 	if wasSlimed:
-		var ragingFireEffect : RagingFireEffect = ragingFireEffectSpawner.instanceScene(get_parent(), Vector2.ZERO)
-		ragingFireEffect.setupEffect()
+		var parentCharacter : Character = get_parent() as Character
+		assert(parentCharacter, "Effect added to non-character.")
+
+		var ragingFireEffect : RagingFireEffect = ragingFireEffectPacked.instantiate()
+		ragingFireEffect.position = parentCharacter.to_local(parentCharacter.getVisualCenterGlobalPosition())
+		parentCharacter.add_child(ragingFireEffect)
 		queue_free()
 
 func _on_timer_timeout():

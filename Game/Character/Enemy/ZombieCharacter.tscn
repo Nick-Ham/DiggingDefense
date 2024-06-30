@@ -49,7 +49,7 @@ visualCenterMarker = NodePath("VisualCenterMarker")
 
 [node name="Health" type="Node" parent="."]
 script = ExtResource("2_8tlqh")
-maxHealth = 5
+maxHealth = 50
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("targetHealth") instance=ExtResource("3_v0eli")]
 position = Vector2(0, -15)

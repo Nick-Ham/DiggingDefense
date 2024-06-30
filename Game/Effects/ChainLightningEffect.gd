@@ -3,6 +3,7 @@ class_name ChainLightningEffect
 
 @export_category("Config")
 @export var jumpDelay : float = 1.0
+@export var maxJumps : int = 2
 @export var maxChainSize : int = 3
 
 @export_category("Local")
@@ -15,8 +16,9 @@ var trackedTargets : Array[Character]
 var currentTargets : Array[Character]
 var source : Node2D = null
 var effectTimeoutStarted : bool = false
+var currentJumps : int = 0
 
-var jumpFailed : bool = false
+var jumpsCompleted : bool = false
 
 func _ready() -> void:
 	assert(jumpArea)
@@ -32,23 +34,33 @@ func _physics_process(delta: float) -> void:
 	if totalTime > jumpDelay:
 		totalTime -= jumpDelay
 
-		if jumpFailed:
+		if jumpsCompleted:
 			currentTargets.pop_front()
+			return
+
+		if currentJumps >= maxJumps:
+			jumpsCompleted = true
+			completeJumps()
 			return
 
 		var newTarget : Character = findNewTarget()
 		if !newTarget:
-			jumpFailed = true
-			if trackedTargets.is_empty():
-				return
-
-			if trackedTargets.back() == null || trackedTargets.back().is_queued_for_deletion():
-				return
-
-			damage.dealDamage(trackedTargets.back())
+			jumpsCompleted = true
+			completeJumps()
 			return
 
 		jumpToTarget(newTarget)
+		currentJumps += 1
+
+func completeJumps() -> void:
+	if trackedTargets.is_empty():
+		return
+
+	if trackedTargets.back() == null || trackedTargets.back().is_queued_for_deletion():
+		return
+
+	if currentJumps == 0: # single target bonus damage
+		damage.dealDamage(trackedTargets.back())
 
 func setInitialTarget(inTarget : Character) -> void:
 	totalTime = 0.0
@@ -62,6 +74,7 @@ func setInitialTarget(inTarget : Character) -> void:
 	updateLine()
 
 	Util.safeConnect(inTarget.character_destroyed, _on_target_destroyed)
+
 	damage.dealDamage(inTarget)
 
 func findNewTarget() -> Character:

@@ -24,6 +24,8 @@ var turrets : Dictionary = {}
 var extracters : Dictionary = {}
 var effects : Dictionary = {}
 
+signal map_updated
+
 func registerEffect(inEffect : EnvironmentalEffect) -> void:
 	var effectGlobalPosition = inEffect.global_position
 	var effectLocalPosition = to_local(effectGlobalPosition)
@@ -74,6 +76,7 @@ func tryBreakTileAtPosition(inMapCoordinate : Vector2i) -> bool:
 	var tileKey : String = TILES.find_key(TILE_TYPE.GROUND)
 	set_cell(0, inMapCoordinate, 1, TILE_ATLAS_COORD.get(tileKey))
 
+	map_updated.emit()
 	return true
 
 func trySpawnTurret(inTurretData : TurretData, inMapCoordinate : Vector2i) -> bool:
@@ -86,6 +89,7 @@ func trySpawnTurret(inTurretData : TurretData, inMapCoordinate : Vector2i) -> bo
 	add_child(newTurretInstance)
 	turrets[inMapCoordinate] = newTurretInstance
 
+	map_updated.emit()
 	return true
 
 func tryCreateExtracter(inPosition : Vector2i) -> bool:
@@ -98,6 +102,7 @@ func tryCreateExtracter(inPosition : Vector2i) -> bool:
 	add_child(newExtracterInstance)
 	extracters[inPosition] = newExtracterInstance
 
+	map_updated.emit()
 	return true
 
 func globalToTileCoordinate(inGlobalPosition : Vector2) -> Vector2i:

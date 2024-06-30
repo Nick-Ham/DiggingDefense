@@ -6,10 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_es1hn"]
 size = Vector2(86, 86)
 
-[node name="StaticTurret" type="Area2D" node_paths=PackedStringArray("sprite", "turretLaserStart", "attackLine", "reloadTimer")]
-collision_layer = 0
-collision_mask = 8
+[node name="StaticTurret" type="Node2D" node_paths=PackedStringArray("detector", "sprite", "turretLaserStart", "attackLine", "reloadTimer")]
 script = ExtResource("1_ndqu8")
+detector = NodePath("Detector")
 sprite = NodePath("Sprite2D")
 turretLaserStart = NodePath("Marker2D")
 attackLine = NodePath("AttackLine")
@@ -17,9 +16,6 @@ reloadTimer = NodePath("ReloadTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_lp1bl")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_es1hn")
 
 [node name="AttackLine" type="Line2D" parent="."]
 width = 0.8
@@ -31,3 +27,10 @@ position = Vector2(0, -13)
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Detector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+shape = SubResource("RectangleShape2D_es1hn")

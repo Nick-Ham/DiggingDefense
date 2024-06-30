@@ -6,6 +6,7 @@ class_name StaticTurret
 @export var chargeSpeed : float = 1.0
 
 @export_category("Local")
+@export var detector : Area2D
 @export var sprite : Sprite2D
 @export var turretLaserStart : Marker2D
 @export var attackLine : Line2D
@@ -22,8 +23,8 @@ func _ready() -> void:
 	assert(attackLine)
 	assert(reloadTimer)
 
-	Util.safeConnect(body_entered, _on_body_entered)
-	Util.safeConnect(body_exited, _on_body_exited)
+	Util.safeConnect(detector.body_entered, _on_body_entered)
+	Util.safeConnect(detector.body_exited, _on_body_exited)
 
 func _on_body_entered(inBody : Node2D) -> void:
 	var enemyCharacter : EnemyCharacter = inBody as EnemyCharacter

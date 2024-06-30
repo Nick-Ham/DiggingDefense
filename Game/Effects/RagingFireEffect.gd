@@ -6,9 +6,9 @@ class_name RagingFireEffect
 
 func _ready():
 	fireTick.timeout.connect(_on_timer_timeout)
+	setupEffect()
 
 func setupEffect():
-	super()
 	damage.dealDamage(get_parent())
 	clearOtherFire(get_parent())
 

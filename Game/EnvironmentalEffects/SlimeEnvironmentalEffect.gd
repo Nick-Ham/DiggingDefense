@@ -1,8 +1,7 @@
 extends EnvironmentalEffect
 class_name SlimeEnvironmentalEffect
 
-@export_category("Local")
-@export var effectSpawner : SceneSpawner
+var slimedEffectPacked : PackedScene = preload("res://Game/Effects/SlimedEffect.tscn")
 
 func applyEffect(body):
 	var character = body as Character
@@ -21,5 +20,6 @@ func applyEffect(body):
 	if !characterHealth:
 		return
 
-	var newEffect : Effect = effectSpawner.instanceScene(body, Vector2())
-	newEffect.setupEffect()
+	var slimedEffectInstance : SlimedEffect = slimedEffectPacked.instantiate()
+	slimedEffectInstance.position = character.to_local(character.getVisualCenterGlobalPosition())
+	character.add_child(slimedEffectInstance)

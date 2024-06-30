@@ -10,7 +10,7 @@ var mainMenu : MainMenu = null
 var currentLevelPackedScene : PackedScene = null
 
 func _ready() -> void:
-	#Engine.time_scale = 5.0
+	Engine.time_scale = 1.0
 	return
 
 func registerMainMenu(inMenu : MainMenu) -> void:
